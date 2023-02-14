@@ -33,6 +33,7 @@ int main(int argc, const char * argv[]){
 
     string quad_dict_word;
     while(quad_dictionary_file >> quad_dict_word){
+        cout << quad_dict_word << endl;
         qp.insert(quad_dict_word);
     }
 

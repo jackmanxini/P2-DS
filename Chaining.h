@@ -17,7 +17,7 @@ class Chaining{
 
     public:
         Chaining(int);
-        int hashfunction(string&);
+        unsigned int hashfunction(string&);
         void insert(string);
         string search(string);
         bool isPrime(int n);

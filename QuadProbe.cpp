@@ -9,8 +9,8 @@ QuadProbe::QuadProbe(int size){
         }
 }
 
-int QuadProbe::hashfunction(string &word){
-    int key = 0;
+unsigned int QuadProbe::hashfunction(string &word){
+    unsigned int key = 0;
     for (char ch : word){
         key = 37*key+ch;
     }
@@ -21,6 +21,7 @@ int QuadProbe::hashfunction(string &word){
 void QuadProbe::insert(string word) {
         int index = hashfunction(word);
         for (int i = 1; i < table_size; i++) {
+            cout << index << endl;
             if (table[index] == "") {
                 table[index] = word;
                 break;

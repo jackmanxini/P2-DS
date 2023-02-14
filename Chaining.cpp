@@ -12,8 +12,8 @@ Chaining::Chaining(int size){
     }
 }
 
-int Chaining::hashfunction(string &word){
-    int key = 0;
+unsigned int Chaining::hashfunction(string &word){
+    unsigned int key = 0;
     for (char ch : word){
         key = 37*key+ch;
     }
