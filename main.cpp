@@ -2,6 +2,9 @@
 #include "Chaining.h"
 #include <iostream>
 #include <fstream>
+#include <chrono>
+
+using namespace std::chrono;
 
 using namespace std;
 
@@ -18,6 +21,9 @@ int main(int argc, const char * argv[]){
     QuadProbe qp(TABLE_SIZE);
     Chaining c(TABLE_SIZE);
 
+    duration<double, nano> quad_hash_time;
+    duration<double, nano> chaining_hash_time;
+
     int chaining_num_wrong = 0;
     int quad_num_wrong = 0;
 
@@ -32,10 +38,12 @@ int main(int argc, const char * argv[]){
     else{
 
     string quad_dict_word;
+    auto quadStart = high_resolution_clock::now();
     while(quad_dictionary_file >> quad_dict_word){
-        cout << quad_dict_word << endl;
         qp.insert(quad_dict_word);
     }
+    auto quadEnd = high_resolution_clock::now();
+    quad_hash_time = quadStart - quadEnd;
 
 
     string quad_check_word;
@@ -68,9 +76,12 @@ int main(int argc, const char * argv[]){
     else{
 
         string chaining_dict_word;
+        auto chainingStart = high_resolution_clock::now();
         while(chaining_dictionary_file >> chaining_dict_word){
         c.insert(chaining_dict_word);
     }
+        auto chainingEnd = high_resolution_clock::now();
+        chaining_hash_time = chainingStart - chainingEnd;
 
 
     string chaining_check_word;
@@ -86,6 +97,9 @@ int main(int argc, const char * argv[]){
     }
 
     }
+
+    cout << "QUADRATIC PROBING FOUND : " << quad_num_wrong << " INCORRECTLY SPELLED WORDS \n TIME SPENT CREATING HASH TABLE (QUADRATIC PROBING): " << quad_hash_time.count() << endl;
+    cout << "CHAINING FOUND : " << chaining_num_wrong << " INCORRECTLY SPELLED WORDS \n TIME SPENT CREATING HASH TABLE (CHAINING) : " << chaining_hash_time.count() << endl;
 
     chaining_dictionary_file.close();
     chaining_input_file.close();
