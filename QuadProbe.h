@@ -2,19 +2,15 @@
 #include <cmath>
 #include <cctype>
 #include <regex>
+#include <string>
+
 
 using namespace std;
-
-struct Node{
-    string word;
-    Node *nPtr;
-};
 
 class QuadProbe{
     private:
         int table_size;
-        Node **table;
-
+        string* table;
     public:
         QuadProbe(int);
         int hashfunction(string&);

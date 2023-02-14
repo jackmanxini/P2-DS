@@ -2,12 +2,11 @@
 
 
 QuadProbe::QuadProbe(int size){
-    table_size = size;
-    table = new Node*[table_size];
-
-    for (int i = 0; i < table_size; i++){
-        table[i] = nullptr;
-    }
+        table_size = size;
+        table = new string[table_size];
+        for (int i = 0; i < table_size; i++) {
+            table[i] = "";
+        }
 }
 
 int QuadProbe::hashfunction(string &word){
@@ -20,28 +19,25 @@ int QuadProbe::hashfunction(string &word){
 }
 
 void QuadProbe::insert(string word) {
-  int index = hashfunction(word);
-
-  for (int i = 1; i < table_size; i++) {
-    if (table[index] == nullptr) {
-      Node *newNode = new Node();
-      newNode->word = word;
-      table[index] = newNode;
-      break;
-    } else {
-      index = (index + i * i) % table_size;
-    }
-  }
+        int index = hashfunction(word);
+        for (int i = 1; i < table_size; i++) {
+            if (table[index] == "") {
+                table[index] = word;
+                break;
+            } else {
+                index = (index + i * i) % table_size;
+            }
+        }
 }
 
 string QuadProbe::search(string word){
     int index = hashfunction(word);
 
     for (int i = 1; i < table_size; i++) {
-        if (table[index] == nullptr) {
+        if (table[index] == "") {
             return "WNF";
-        } else if (table[index]->word == word) {
-            return table[index]->word;
+        } else if (table[index] == word) {
+            return table[index];
         } else {
             index = (index + i * i) % table_size;
         }
